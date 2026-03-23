@@ -1,0 +1,29 @@
+# Dependencies
+frontend/node_modules/
+backend/venv/
+
+# Build output
+frontend/dist/
+
+# Database
+backend/restrictions.db
+
+# Python
+__pycache__/
+*.pyc
+
+# Environment
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# Screenshots (dev artifacts)
+*.png
+
+# Playwright MCP
+.playwright-mcp/
+
+# Claude
+.claude/

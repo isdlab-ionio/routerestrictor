@@ -1,0 +1,317 @@
+import json
+from datetime import date
+
+SEGMENTS = [
+    {
+        "name": "Nikiforou Theotoki",
+        "name_gr": "Νικηφόρου Θεοτόκη",
+        "area": "Old Town",
+        "width_m": 6.0,
+        "notes": "Main commercial street through Old Town",
+        "geometry": json.dumps({
+            "type": "LineString",
+            "coordinates": [
+                [19.9210, 39.6245],
+                [19.9215, 39.6240],
+                [19.9220, 39.6235],
+                [19.9225, 39.6228],
+            ],
+        }),
+    },
+    {
+        "name": "Kapodistriou",
+        "name_gr": "Καποδιστρίου",
+        "area": "Old Town",
+        "width_m": 5.5,
+        "notes": "Runs along the Spianada esplanade",
+        "geometry": json.dumps({
+            "type": "LineString",
+            "coordinates": [
+                [19.9230, 39.6250],
+                [19.9232, 39.6242],
+                [19.9234, 39.6235],
+            ],
+        }),
+    },
+    {
+        "name": "Filellinon",
+        "name_gr": "Φιλελλήνων",
+        "area": "Old Town",
+        "width_m": 4.5,
+        "notes": "Connects Spianada area to the port side",
+        "geometry": json.dumps({
+            "type": "LineString",
+            "coordinates": [
+                [19.9218, 39.6252],
+                [19.9222, 39.6248],
+                [19.9228, 39.6244],
+            ],
+        }),
+    },
+    {
+        "name": "Guilford",
+        "name_gr": "Γκίλφορδ",
+        "area": "Old Town",
+        "width_m": 5.0,
+        "notes": "Named after Frederick North, 5th Earl of Guilford",
+        "geometry": json.dumps({
+            "type": "LineString",
+            "coordinates": [
+                [19.9200, 39.6238],
+                [19.9205, 39.6235],
+                [19.9212, 39.6230],
+            ],
+        }),
+    },
+    {
+        "name": "Mourayia",
+        "name_gr": "Μουράγια",
+        "area": "Old Town",
+        "width_m": 3.5,
+        "notes": "Coastal promenade along the old port wall",
+        "geometry": json.dumps({
+            "type": "LineString",
+            "coordinates": [
+                [19.9190, 39.6260],
+                [19.9195, 39.6255],
+                [19.9198, 39.6248],
+                [19.9200, 39.6242],
+            ],
+        }),
+    },
+    {
+        "name": "Donzelot",
+        "name_gr": "Ντονζελότ",
+        "area": "Old Town",
+        "width_m": 4.0,
+        "notes": "Named after French general, connects Liston to port area",
+        "geometry": json.dumps({
+            "type": "LineString",
+            "coordinates": [
+                [19.9215, 39.6250],
+                [19.9210, 39.6252],
+                [19.9205, 39.6255],
+            ],
+        }),
+    },
+    {
+        "name": "Evgeniou Voulgareos",
+        "name_gr": "Ευγενίου Βουλγάρεως",
+        "area": "Old Town",
+        "width_m": 5.0,
+        "notes": "Major commercial street parallel to Theotoki",
+        "geometry": json.dumps({
+            "type": "LineString",
+            "coordinates": [
+                [19.9205, 39.6248],
+                [19.9210, 39.6242],
+                [19.9215, 39.6236],
+                [19.9218, 39.6230],
+            ],
+        }),
+    },
+    {
+        "name": "Campiello Alley A",
+        "name_gr": "Στενό Καμπιέλο Α",
+        "area": "Campiello",
+        "width_m": 1.8,
+        "notes": "Narrow stepped alley in the Venetian quarter",
+        "geometry": json.dumps({
+            "type": "LineString",
+            "coordinates": [
+                [19.9195, 39.6242],
+                [19.9197, 39.6240],
+                [19.9198, 39.6237],
+            ],
+        }),
+    },
+    {
+        "name": "Campiello Alley B",
+        "name_gr": "Στενό Καμπιέλο Β",
+        "area": "Campiello",
+        "width_m": 1.5,
+        "notes": "Very narrow passage, scooters only with difficulty",
+        "geometry": json.dumps({
+            "type": "LineString",
+            "coordinates": [
+                [19.9192, 39.6245],
+                [19.9194, 39.6243],
+                [19.9196, 39.6240],
+            ],
+        }),
+    },
+    {
+        "name": "Spianada - Liston",
+        "name_gr": "Σπιανάδα - Λιστόν",
+        "area": "Liston",
+        "width_m": 8.0,
+        "notes": "Arcaded promenade modeled on Rue de Rivoli, Paris",
+        "geometry": json.dumps({
+            "type": "LineString",
+            "coordinates": [
+                [19.9228, 39.6248],
+                [19.9230, 39.6244],
+                [19.9232, 39.6240],
+                [19.9233, 39.6236],
+            ],
+        }),
+    },
+]
+
+RESTRICTIONS = [
+    {
+        "segment_index": 0,  # Nikiforou Theotoki
+        "restriction_type": "no_private_cars",
+        "title": "Theotoki pedestrian priority zone",
+        "description": "Private cars prohibited during daytime hours. Delivery vehicles allowed 06:00-09:00.",
+        "direction": "both",
+        "vehicle_classes": json.dumps(["private_car", "rental_car"]),
+        "recurrence": "daily 09:00-24:00",
+        "legal_basis": "Municipal Decision 234/2023",
+        "status": "published",
+        "created_by": "admin",
+        "approved_by": "mayor_office",
+    },
+    {
+        "segment_index": 0,  # Nikiforou Theotoki
+        "restriction_type": "delivery_windows",
+        "title": "Theotoki delivery time window",
+        "description": "Delivery trucks permitted only during early morning hours.",
+        "direction": "both",
+        "vehicle_classes": json.dumps(["truck"]),
+        "recurrence": "daily 06:00-09:00",
+        "legal_basis": "Municipal Decision 234/2023",
+        "status": "published",
+        "created_by": "admin",
+        "approved_by": "mayor_office",
+    },
+    {
+        "segment_index": 1,  # Kapodistriou
+        "restriction_type": "one_way",
+        "title": "Kapodistriou one-way southbound",
+        "description": "One-way traffic southbound along the Spianada.",
+        "direction": "southbound",
+        "vehicle_classes": json.dumps(["private_car", "rental_car", "bus", "truck"]),
+        "recurrence": "permanent",
+        "legal_basis": "Traffic Code Corfu 12/2020",
+        "status": "published",
+        "created_by": "traffic_dept",
+        "approved_by": "mayor_office",
+    },
+    {
+        "segment_index": 2,  # Filellinon
+        "restriction_type": "residents_only",
+        "title": "Filellinon residents-only access",
+        "description": "Only residents with permits may drive on this street.",
+        "direction": "both",
+        "vehicle_classes": json.dumps(["private_car", "rental_car"]),
+        "recurrence": "permanent",
+        "legal_basis": "Municipal Decision 178/2022",
+        "status": "approved",
+        "created_by": "traffic_dept",
+    },
+    {
+        "segment_index": 3,  # Guilford
+        "restriction_type": "pedestrian_priority",
+        "title": "Guilford pedestrian zone",
+        "description": "Full pedestrian priority. Vehicles only for emergencies.",
+        "direction": "both",
+        "vehicle_classes": json.dumps(["private_car", "rental_car", "truck", "bus"]),
+        "recurrence": "permanent",
+        "status": "published",
+        "created_by": "admin",
+        "approved_by": "mayor_office",
+    },
+    {
+        "segment_index": 4,  # Mourayia
+        "restriction_type": "full_closure",
+        "title": "Mourayia summer evening closure",
+        "description": "Fully closed to all vehicles during summer evenings for the promenade.",
+        "direction": "both",
+        "vehicle_classes": json.dumps(["private_car", "rental_car", "truck", "bus", "motorcycle"]),
+        "start_date": date(2026, 5, 1),
+        "end_date": date(2026, 10, 15),
+        "recurrence": "daily 18:00-02:00",
+        "legal_basis": "Summer Order 45/2026",
+        "status": "approved",
+        "created_by": "events_dept",
+    },
+    {
+        "segment_index": 5,  # Donzelot
+        "restriction_type": "temporary_event",
+        "title": "Easter procession route closure",
+        "description": "Street closed for the Holy Saturday Litany procession.",
+        "direction": "both",
+        "vehicle_classes": json.dumps(["private_car", "rental_car", "truck", "bus", "motorcycle"]),
+        "start_date": date(2026, 4, 11),
+        "end_date": date(2026, 4, 12),
+        "recurrence": None,
+        "legal_basis": "Event Permit EP-2026-041",
+        "status": "draft",
+        "created_by": "events_dept",
+    },
+    {
+        "segment_index": 6,  # Evgeniou Voulgareos
+        "restriction_type": "authorized_only",
+        "title": "Voulgareos authorized vehicles only",
+        "description": "Only authorized supply and municipal vehicles. Permit sticker required.",
+        "direction": "both",
+        "vehicle_classes": json.dumps(["private_car", "rental_car"]),
+        "recurrence": "daily 10:00-22:00",
+        "legal_basis": "Municipal Decision 301/2024",
+        "status": "published",
+        "created_by": "traffic_dept",
+        "approved_by": "mayor_office",
+    },
+    {
+        "segment_index": 7,  # Campiello Alley A
+        "restriction_type": "unsuitable_for_cars",
+        "title": "Campiello A - unsuitable for cars",
+        "description": "Stepped narrow alley, physically impassable for any 4-wheeled vehicle.",
+        "direction": "both",
+        "vehicle_classes": json.dumps(["private_car", "rental_car", "truck", "bus"]),
+        "recurrence": "permanent",
+        "status": "published",
+        "created_by": "admin",
+        "approved_by": "traffic_dept",
+    },
+    {
+        "segment_index": 8,  # Campiello Alley B
+        "restriction_type": "width_restriction",
+        "title": "Campiello B - max width 1.2m",
+        "description": "Extremely narrow passage. Maximum vehicle width 1.2 meters.",
+        "direction": "both",
+        "vehicle_classes": json.dumps(["private_car", "rental_car", "truck", "bus"]),
+        "recurrence": "permanent",
+        "status": "published",
+        "created_by": "admin",
+        "approved_by": "traffic_dept",
+    },
+    {
+        "segment_index": 9,  # Spianada - Liston
+        "restriction_type": "seasonal_restriction",
+        "title": "Liston summer pedestrianization",
+        "description": "Liston area fully pedestrianized during tourist season.",
+        "direction": "both",
+        "vehicle_classes": json.dumps(["private_car", "rental_car", "truck", "bus", "motorcycle"]),
+        "start_date": date(2026, 4, 1),
+        "end_date": date(2026, 10, 31),
+        "recurrence": "summer",
+        "legal_basis": "Municipal Decision 89/2025",
+        "status": "approved",
+        "created_by": "tourism_dept",
+    },
+    {
+        "segment_index": 4,  # Mourayia
+        "restriction_type": "emergency_only",
+        "title": "Mourayia emergency vehicle access",
+        "description": "During closure hours only ambulances and fire trucks may pass.",
+        "direction": "both",
+        "vehicle_classes": json.dumps(["private_car", "rental_car", "truck", "bus", "motorcycle"]),
+        "start_date": date(2026, 5, 1),
+        "end_date": date(2026, 10, 15),
+        "recurrence": "daily 18:00-02:00",
+        "status": "approved",
+        "created_by": "admin",
+    },
+]
